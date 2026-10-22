@@ -769,9 +769,14 @@ def match_pads(req, rows):
     """WAVE 1: pads are caliper-specific; a wrong shape is a brake that does not stop."""
     cal = req.get("caliper")
     kind = req.get("brake_kind")
+    # REVIEW: without a stated brake type the pad shape cannot be verified at all.
+    if not kind:
+        return result("cannot_confirm", None, ["PAD-TYPE"],
+                      "brake type not stated; pad shape cannot be verified",
+                      {"attribute": "Тип", "text": "Тормоз дисковый или ободной?",
+                       "options": ["дисковый", "ободной", "не знаю"], "resolves": ["PAD-TYPE"]})
     pool = [r for r in rows if not is_spare("pads", r.get("name", ""))]
-    if kind:
-        pool = [r for r in pool if kind in str((r.get("attributes") or {}).get("Тип", "")).lower()]
+    pool = [r for r in pool if kind in str((r.get("attributes") or {}).get("Тип", "")).lower() or not str((r.get("attributes") or {}).get("Тип", "")).strip()]
     if not cal:
         q = {"attribute": "Модель тормоза", "text": "Какая модель написана на калипере?",
              "options": [], "resolves": ["PAD-CALIPER"]}
@@ -1005,9 +1010,8 @@ def requirement(slot, bike):
     # Gemini L1: floor raised 95% -> 99% / deterministic only. Eagle=>12s (96%) no longer qualifies.
     # L3: A/B switch — FITMENT_NOINFER=1 turns every inference off for a frozen-sample comparison.
     if not os.environ.get("FITMENT_NOINFER"):
-        if not req.get("axle") and req.get("speed") == 12:
-            req["axle"] = "thru"
-            req["axle_inferred"] = "speed12"  # 100%, n=47
+        # REVIEW: a 100% correlation over 47 bikes is not a versioned compatibility rule.
+        # 12-speed ⇒ thru-axle is no longer asserted; the axle stays unknown until stated.
         if slot == "bottom_bracket":
             blob = json.dumps(bike, ensure_ascii=False).lower()
             for key, val in (("dub", "dub"), ("hollowtech", "24"), ("gxp", "gxp"), ("30mm", "30")):
@@ -1026,7 +1030,7 @@ def requirement(slot, bike):
         wh = bike.get("wheels") or {}
         bt = str(br.get("type") or "").strip()
         req["brake_kind"] = brake_type(bt)
-        req["rotor_mm"] = parse_rotor_mm(bt) or parse_rotor_mm(json.dumps(bike, ensure_ascii=False))
+        req["rotor_mm"] = parse_rotor_mm(bt)  # REVIEW: never scanned from the whole record
         req["caliper"] = parse_caliper(bt)
         req["rotor_mount"] = parse_rotor_mount(bt) or parse_rotor_mount(str(wh.get("hubs") or ""))
         return req

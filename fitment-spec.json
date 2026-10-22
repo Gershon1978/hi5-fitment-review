@@ -3,11 +3,12 @@
   "generated": "2026-10-21",
   "question_this_answers": "For each catalogue category, which attributes are MUST-HAVE: if the product's value differs from what the bike needs, the product is excluded. Everything else ranks.",
   "decisions_already_made": [
-    "No questions to the rider at matching time; only the category attributes are used.",
     "A missing attribute is never a guess: it yields cannot_confirm, not a fit.",
     "Speed count is an exact match, not a maximum (a 2x11 derailleur is not offered for a 2x10 bike).",
     "Max chainring is soft: a shorter cage is compatible_with_calibration, trimmed on the limit screw.",
-    "e-bike and e-scooter manuals are excluded; only the two bicycle manuals are sources."
+    "e-bike and e-scooter manuals are excluded; only the two bicycle manuals are sources.",
+    "Questions to the rider ARE allowed (supersedes the v0.1 'no questions' decision): at most three per bike, ordered by consequence, options drawn from stock, never a form. A question must resolve one named missing attribute.",
+    "A candidate shown alongside cannot_confirm is a LEAD, never a recommendation: the advisor must not render it as a confirmed fit until the missing attribute is supplied."
   ],
   "vocabulary": {
     "must_have": {
@@ -2384,5 +2385,26 @@
     "Rim ERD is not recorded, so spoke length cannot be computed from the catalogue alone.",
     "The bicycle manuals are silent on speed cross-compatibility; shop decision keeps it exact.",
     "22 of 48 front derailleurs have no max chainring value; that rule stays soft and mostly unknown."
-  ]
+  ],
+  "question_policy": {
+    "allowed": true,
+    "max_per_bike": 3,
+    "priority": [
+      "bottom_bracket",
+      "hubs",
+      "brakes",
+      "cassette",
+      "crankset"
+    ],
+    "options_source": "stock distribution",
+    "never_ask": [
+      "a standard the customer cannot read off the part"
+    ],
+    "lead_semantics": "candidate + cannot_confirm = lead, not a recommendation"
+  },
+  "shipping_gate": {
+    "rule": "a product may be 'fits' only when every applicable mandatory attribute is verified",
+    "brakes": "cannot_confirm until mechanic-reviewed positive AND negative fixtures exist",
+    "unaudited_classes_note": "precision 1.000 covers form/brand/speed/range/freehub only; rotors and pads were unaudited until audit_wave1.py"
+  }
 }
