@@ -1,0 +1,63 @@
+{
+  "spec": "hi5.fitment.v0.3+addenda",
+  "applies_to": "hi5.fitment.v0.3",
+  "generated": "2026-10-22",
+  "audit": {
+    "method": "every attribute_coverage claim measured against WORKSPACE/data/all_products.json, category membership by path suffix",
+    "claims_checked": 46,
+    "exact_matches": 45,
+    "within_tolerance": 1,
+    "detail": [
+      {
+        "category": "Адаптеры",
+        "rule": "ADAPTER-TRANSITION",
+        "claimed": 0.822,
+        "attribute_only": 0.778,
+        "attribute_or_title": 0.844,
+        "verdict": "claim is conservative - the combined attribute+title rule measures higher"
+      }
+    ],
+    "denominator_note": "v0.3 numbers use category membership (a product counts if any of its paths ends in the leaf): 30 bearings, not the 22 that main_category returns. Membership is the right denominator for the engine, and v0.1/v0.2 used main_category - so their numbers were not comparable."
+  },
+  "corrections": [
+    {
+      "claim": "chain rule ids aligned with live mechanicRules.ts",
+      "actual": "PART-FORM, DRIVETRAIN-SPEED-RANGE and LENGTH-CUT-TO-FIT live in specSchemas.ts (4 occurrences). mechanicRules.ts holds RD-* ids including RD-MAX-COG-EXCEEDED. Both files are live; the provenance note was wrong, the ids are right."
+    }
+  ],
+  "enforcement_gap": {
+    "problem": "on_missing: ignore_unless_explicitly_requested cannot be implemented without a deterministic definition of 'explicitly requested'. v0.3 uses the phrase in 14 places but never says who decides it.",
+    "decision": "a requested_params extractor runs over the free-text query + intent, is deterministic, and its output is echoed in the advice basis so the rider can see which constraints were applied.",
+    "third_state": {
+      "when": "conditional_veto attribute is missing on the row AND the parameter was requested",
+      "outcome": "cannot_confirm",
+      "why": "v0.3 states this only for BB-SPINDLE-LENGTH and HEADSET-SHIS; without generalising it, a requested constraint silently passes and the tool says fits on facts it never checked.",
+      "rule": "every conditional_veto carries on_missing_requested: cannot_confirm"
+    }
+  },
+  "requested_params": [
+    { "param": "rotor.mount", "attribute": "Тип", "cues": ["6 болт", "6-bolt", "center lock", "центральный замок"] },
+    { "param": "rotor.diameter", "attribute": "Диаметр", "cues": ["140", "160", "180", "203", "220"] },
+    { "param": "pad.model", "attribute": "Совместимость", "cues": ["BR-", "M4", "B01S", "колодк"] },
+    { "param": "axle.standard", "attribute": "Крепление/Ось", "cues": ["15x100", "15x110", "20x110", "12x142", "12x148", "QR", "эксцентрик"] },
+    { "param": "hub.old", "attribute": "Крепление", "cues": ["100", "135", "142", "148"] },
+    { "param": "freehub", "attribute": "Стандарт барабана", "cues": ["HG", "XD", "micro spline", "микросплайн"] },
+    { "param": "bb.standard", "attribute": "Тип", "cues": ["BSA", "BB86", "BB92", "PF30", "T47", "пресс"] },
+    { "param": "bb.spindle_length", "attribute": "Длина", "cues": ["113", "118", "122.5", "квадрат", "octalink"] },
+    { "param": "chain.family", "attribute": "Семейство цепи", "cues": ["flattop", "HG+", "eagle"] },
+    { "param": "chain.min_links", "attribute": "Длина", "cues": ["не менее", "минимум", "116", "126"] },
+    { "param": "tyre.width", "attribute": "Ширина", "cues": ["2.1", "2.25", "2.35", "700x25", "700x28"] },
+    { "param": "tube.valve", "attribute": "Вентиль", "cues": ["AV", "FV", "presta", "schrader", "48 мм", "60 мм"] },
+    { "param": "post.size", "attribute": "Диаметр", "cues": ["27.2", "30.9", "31.6", "34.9"] },
+    { "param": "post.travel", "attribute": "Ход", "cues": ["дроппер", "dropper", "ход 1", "travel"] },
+    { "param": "stem.interface", "attribute": "Диаметр/Title", "cues": ["1-1/8", "31.8", "35", "резьбов", "quill"] },
+    { "param": "headset.shis", "attribute": "Title", "cues": ["ZS44", "ZS56", "IS42", "IS52", "EC34"] },
+    { "param": "rd.max_cog", "attribute": "Макс. звезда", "cues": ["46T", "50T", "51T", "52T"] },
+    { "param": "shifter.family", "attribute": "Модель", "cues": ["shimano", "sram", "cues", "linkglide"] }
+  ],
+  "open": [
+    "Adopt requested_params as a tested parser before any conditional_veto is implemented.",
+    "Decide whether a requested param that the row states ambiguously (e.g. '31.8/34.9') is a match or cannot_confirm.",
+    "v0.3 keeps 8-10 core rules per category; audit that no category ends with zero active core gates after title parsing is wired."
+  ]
+}

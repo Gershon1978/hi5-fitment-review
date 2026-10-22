@@ -1,0 +1,2388 @@
+{
+  "spec": "hi5.fitment.v0.1",
+  "generated": "2026-10-21",
+  "question_this_answers": "For each catalogue category, which attributes are MUST-HAVE: if the product's value differs from what the bike needs, the product is excluded. Everything else ranks.",
+  "decisions_already_made": [
+    "No questions to the rider at matching time; only the category attributes are used.",
+    "A missing attribute is never a guess: it yields cannot_confirm, not a fit.",
+    "Speed count is an exact match, not a maximum (a 2x11 derailleur is not offered for a 2x10 bike).",
+    "Max chainring is soft: a shorter cage is compatible_with_calibration, trimmed on the limit screw.",
+    "e-bike and e-scooter manuals are excluded; only the two bicycle manuals are sources."
+  ],
+  "vocabulary": {
+    "must_have": {
+      "on_mismatch": "exclude",
+      "on_missing": "cannot_confirm"
+    },
+    "nice_to_have": {
+      "on_mismatch": "rank_down",
+      "on_missing": "ignore"
+    },
+    "outcomes": [
+      "fits",
+      "fits_with_caveat",
+      "cannot_confirm",
+      "excluded"
+    ]
+  },
+  "sources": {
+    "catalogue": {
+      "file": "WORKSPACE/data/all_products.json",
+      "products": 6337
+    },
+    "manuals_included": [
+      {
+        "book": "big_blue_book",
+        "chunks": 2712
+      },
+      {
+        "book": "bike_repair_manual_chris",
+        "chunks": 595
+      }
+    ],
+    "manuals_excluded": [
+      {
+        "book": "Ai_generated_ebike_motor",
+        "chunks": 238,
+        "reason": "e-bike drive systems"
+      },
+      {
+        "book": "Bafang",
+        "chunks": 178,
+        "reason": "e-bike motors"
+      },
+      {
+        "book": "error_code_guide",
+        "chunks": 107,
+        "reason": "e-bike / scooter error codes"
+      },
+      {
+        "book": "Controller_Reference",
+        "chunks": 68,
+        "reason": "e-bike controllers"
+      },
+      {
+        "book": "Ninebot",
+        "chunks": 16,
+        "reason": "e-scooter"
+      },
+      {
+        "book": "xiaomi_ebike_escooter",
+        "chunks": 7,
+        "reason": "e-bike / e-scooter"
+      }
+    ]
+  },
+  "scope_waves": {
+    "1": "rotors, pads, adapters (binary failures, 98-100% attribute coverage)",
+    "2": "chains, cassettes, bottom brackets, derailleurs, shifters, hangers, cranks, rings",
+    "3": "hubs, rims, spokes, tyres, tubes",
+    "4": "seatposts, stems, bars, headsets, forks, shocks",
+    "tier_b": "ranking only, never excludes",
+    "tier_c": "no fitment rules"
+  },
+  "categories": [
+    {
+      "category": "Роторы",
+      "category_id": 1021,
+      "path": "Тормоза > Роторы",
+      "products": 98,
+      "fitment": "critical",
+      "wave": 1,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 1.0,
+          "rows": 98
+        },
+        {
+          "name": "Материал",
+          "coverage": 1.0,
+          "rows": 98
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.98,
+          "rows": 96
+        }
+      ],
+      "must_have": [
+        {
+          "id": "ROTOR-MOUNT",
+          "attribute": "Тип",
+          "rule": "must equal the hub's rotor mount: 6-bolt or Center Lock",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 744,
+            "quote": "Note the rotor diameter (160mm, 180mm, 203mm typically) and bolt pattern (usually 6-bolt or centerlock) to ensure proper replacement."
+          }
+        },
+        {
+          "id": "ROTOR-DIAMETER",
+          "attribute": "Диаметр",
+          "rule": "must equal the caliper/frame rotor size (140/160/180/203/220 mm)",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 744,
+            "quote": "Note the rotor diameter (160mm, 180mm, 203mm typically) and bolt pattern (usually 6-bolt or centerlock) to ensure proper replacement."
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Материал"
+      ],
+      "manual_support": {
+        "query": [
+          "rotor"
+        ],
+        "hits": 227,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 220,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 744,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 681,
+            "section": ""
+          }
+        ]
+      },
+      "note": "the two facts the manual names before any replacement."
+    },
+    {
+      "category": "Колодки",
+      "category_id": 1022,
+      "path": "Тормоза > Колодки",
+      "products": 237,
+      "fitment": "critical",
+      "wave": 1,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 1.0,
+          "rows": 237
+        },
+        {
+          "name": "Совместимость",
+          "coverage": 0.878,
+          "rows": 208
+        },
+        {
+          "name": "Модель тормоза",
+          "coverage": 0.684,
+          "rows": 162
+        },
+        {
+          "name": "Компаунд",
+          "coverage": 0.595,
+          "rows": 141
+        },
+        {
+          "name": "Длина",
+          "coverage": 0.122,
+          "rows": 29
+        }
+      ],
+      "must_have": [
+        {
+          "id": "PAD-SHAPE",
+          "attribute": "Тип",
+          "rule": "pad shape/family must match the caliper",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 670,
+            "quote": "Pads do not interchange between most brands or even models within a brand."
+          }
+        },
+        {
+          "id": "PAD-CALIPER",
+          "attribute": "Совместимость",
+          "rule": "the stated caliper model must include the rider's caliper",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 670,
+            "quote": "Pads do not interchange between most brands or even models within a brand."
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Компаунд"
+      ],
+      "manual_support": {
+        "query": [
+          "\"brake pads\""
+        ],
+        "hits": 197,
+        "pages": [
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 126,
+            "section": "HUB-MOUNTED BRAKES"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 798,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 119,
+            "section": ""
+          }
+        ]
+      },
+      "note": "compound is performance, never fitment."
+    },
+    {
+      "category": "Адаптеры",
+      "category_id": 1026,
+      "path": "Тормоза > Адаптеры",
+      "products": 45,
+      "fitment": "critical",
+      "wave": 1,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 0.956,
+          "rows": 43
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.822,
+          "rows": 37
+        },
+        {
+          "name": "Переход",
+          "coverage": 0.778,
+          "rows": 35
+        },
+        {
+          "name": "Ось",
+          "coverage": 0.044,
+          "rows": 2
+        }
+      ],
+      "must_have": [
+        {
+          "id": "ADAPTER-MOUNT",
+          "attribute": "Тип",
+          "rule": "caliper mount standard (IS / Post Mount) must match the frame/fork",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "ADAPTER-TRANSITION",
+          "attribute": "Переход",
+          "rule": "rotor-size transition must equal the required change",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ось"
+      ],
+      "manual_support": {
+        "query": [
+          "adapter AND brake"
+        ],
+        "hits": 26,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 675,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 109,
+            "section": "THRU AXLE SYSTEMS"
+          }
+        ]
+      },
+      "note": "mechanical; no single manual page states the IS/PM matrix."
+    },
+    {
+      "category": "Цепи",
+      "category_id": 701,
+      "path": "Трансмиссия > Цепи",
+      "products": 122,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Скорость",
+          "coverage": 0.992,
+          "rows": 121
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.959,
+          "rows": 117
+        }
+      ],
+      "must_have": [
+        {
+          "id": "CHAIN-SPEEDS",
+          "attribute": "Скорость",
+          "rule": "speed count must match the drivetrain exactly (2x11 is not 2x10)",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 928,
+            "quote": "Chain width (single-speed, 5/6/7/8-speed, 9-speed, 10-speed, 11-speed, 12-speed) is *not* specified and must be determined by visual inspection or chain measurement."
+          }
+        },
+        {
+          "id": "CHAIN-FORM",
+          "attribute": "Тип",
+          "rule": "chain vs lock vs pin - a lock is not a chain",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Длина"
+      ],
+      "manual_support": {
+        "query": [
+          "chain AND width"
+        ],
+        "hits": 133,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 448,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 436,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 928,
+            "section": ""
+          }
+        ]
+      },
+      "note": "length is cut to fit, therefore nice-to-have."
+    },
+    {
+      "category": "Кассеты и трещотки",
+      "category_id": 702,
+      "path": "Трансмиссия > Кассеты и трещотки",
+      "products": 136,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 0.985,
+          "rows": 134
+        },
+        {
+          "name": "Количество Зубьев",
+          "coverage": 0.926,
+          "rows": 126
+        },
+        {
+          "name": "Звезда малая",
+          "coverage": 0.912,
+          "rows": 124
+        },
+        {
+          "name": "Скорость",
+          "coverage": 0.882,
+          "rows": 120
+        },
+        {
+          "name": "Семейство скоростей",
+          "coverage": 0.882,
+          "rows": 120
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.794,
+          "rows": 108
+        },
+        {
+          "name": "Звезда большая",
+          "coverage": 0.699,
+          "rows": 95
+        }
+      ],
+      "must_have": [
+        {
+          "id": "CASSETTE-FAMILY",
+          "attribute": "Тип",
+          "rule": "cassette vs freewheel follows the hub interface",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "CASSETTE-SPEEDS",
+          "attribute": "Скорость",
+          "rule": "speed count must match the drivetrain",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "CASSETTE-RANGE",
+          "attribute": "Звезда большая",
+          "rule": "largest cog must not exceed the derailleur's rated maximum",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 567,
+            "quote": "The maximum sprocket size is the largest rear sprocket the derailleur will accept."
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Звезда малая",
+        "Семейство скоростей"
+      ],
+      "manual_support": {
+        "query": [
+          "cassette"
+        ],
+        "hits": 415,
+        "pages": [
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 66,
+            "section": "MAINTAINING YOUR TRANSMISSION • CHAIN, CASSETTE, AND CHAINSET"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 200,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 619,
+            "section": "1.  Secure the cassette with the chain whip."
+          }
+        ]
+      },
+      "note": "freewheel vs cassette is a hub-interface exclusion, not a preference."
+    },
+    {
+      "category": "Каретки",
+      "category_id": 705,
+      "path": "Трансмиссия > Каретки",
+      "products": 118,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 0.864,
+          "rows": 102
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.856,
+          "rows": 101
+        },
+        {
+          "name": "Совместимость",
+          "coverage": 0.517,
+          "rows": 61
+        },
+        {
+          "name": "Длина",
+          "coverage": 0.356,
+          "rows": 42
+        }
+      ],
+      "must_have": [
+        {
+          "id": "BB-STANDARD",
+          "attribute": "Тип",
+          "rule": "shell standard and width (BSA 68/73, BB86/92, PF30, T47)",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 346,
+            "quote": "Verify that the bottom bracket shell type (threaded, press-fit) and dimensions are compatible with the selected bottom bracket."
+          }
+        },
+        {
+          "id": "BB-SHELL-DIA",
+          "attribute": "Диаметр",
+          "rule": "shell diameter must match the frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 346,
+            "quote": "Verify that the bottom bracket shell type (threaded, press-fit) and dimensions are compatible with the selected bottom bracket."
+          }
+        },
+        {
+          "id": "BB-SPINDLE",
+          "attribute": "Совместимость",
+          "rule": "spindle interface must match the crank (square/ISIS/24mm/GXP/DUB)",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 403,
+            "quote": "Cranks attach to the end of the spindles, and consequently the crank must be compatible with the spindle."
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Длина"
+      ],
+      "manual_support": {
+        "query": [
+          "\"bottom bracket\""
+        ],
+        "hits": 449,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 24,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 413,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 404,
+            "section": ""
+          }
+        ]
+      },
+      "note": "spindle LENGTH is the chainline lever; only 36% of rows state it, so it will mostly be cannot_confirm."
+    },
+    {
+      "category": "Передние переключатели",
+      "category_id": 1015,
+      "path": "Трансмиссия > Переключение > Передние переключатели",
+      "products": 48,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Скорость",
+          "coverage": 1.0,
+          "rows": 48
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.896,
+          "rows": 43
+        },
+        {
+          "name": "Тяга",
+          "coverage": 0.896,
+          "rows": 43
+        },
+        {
+          "name": "Диаметр хомута",
+          "coverage": 0.625,
+          "rows": 30
+        },
+        {
+          "name": "Макс. звезда",
+          "coverage": 0.542,
+          "rows": 26
+        }
+      ],
+      "must_have": [
+        {
+          "id": "FD-RINGS",
+          "attribute": "Скорость",
+          "rule": "chainring count and rear speed count must both match",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "FD-MOUNT",
+          "attribute": "Крепление",
+          "rule": "braze-on and clamp never substitute",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 534,
+            "quote": "A common road bike mounting system is referred to as a “braze-on.”"
+          }
+        },
+        {
+          "id": "FD-CLAMP",
+          "attribute": "Диаметр хомута",
+          "rule": "seat-tube diameter must fall inside the clamp range",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 534,
+            "quote": "A common road bike mounting system is referred to as a “braze-on.”"
+          }
+        },
+        {
+          "id": "FD-PULL",
+          "attribute": "Тяга",
+          "rule": "bottom / top / universal; electronic is a motor, never a cable",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 536,
+            "quote": "If the cable is routed from the top along the seat tube, it is a “top pull.”"
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Макс. звезда"
+      ],
+      "manual_support": {
+        "query": [
+          "\"front derailleur\""
+        ],
+        "hits": 169,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 406,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 627,
+            "section": "FRONT DERAILLEUR"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 943,
+            "section": "FRONT DERAILLEUR CAGE BENT OR TWISTED"
+          }
+        ]
+      },
+      "note": "swing type constrains the frame (bottle boss, suspension) - p538; max star is the calibratable soft rule."
+    },
+    {
+      "category": "Задние переключатели",
+      "category_id": 1014,
+      "path": "Трансмиссия > Переключение > Задние переключатели",
+      "products": 55,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Скорость",
+          "coverage": 1.0,
+          "rows": 55
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.945,
+          "rows": 52
+        },
+        {
+          "name": "Макс. звезда",
+          "coverage": 0.564,
+          "rows": 31
+        },
+        {
+          "name": "Лапка",
+          "coverage": 0.545,
+          "rows": 30
+        }
+      ],
+      "must_have": [
+        {
+          "id": "RD-SPEEDS",
+          "attribute": "Скорость",
+          "rule": "rated speeds must include the cassette on the bike",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "RD-MOUNT",
+          "attribute": "Крепление",
+          "rule": "hanger type / direct mount must match the frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "RD-MAX-COG",
+          "attribute": "Макс. звезда",
+          "rule": "largest cassette cog must not exceed the rated maximum",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 567,
+            "quote": "The maximum sprocket size is the largest rear sprocket the derailleur will accept."
+          }
+        },
+        {
+          "id": "RD-CAPACITY",
+          "attribute": "Лапка",
+          "rule": "cage length must cover chainring difference + cassette range",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 567,
+            "quote": "The maximum sprocket size is the largest rear sprocket the derailleur will accept."
+          }
+        }
+      ],
+      "nice_to_have": [],
+      "manual_support": {
+        "query": [
+          "\"rear derailleur\""
+        ],
+        "hits": 240,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 38,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 637,
+            "section": "REAR DERAILLEUR"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 439,
+            "section": ""
+          }
+        ]
+      },
+      "note": "capacity is the sum rule: front difference + rear span."
+    },
+    {
+      "category": "Манетки и шифтеры",
+      "category_id": 1016,
+      "path": "Трансмиссия > Переключение > Манетки и шифтеры",
+      "products": 70,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 0.943,
+          "rows": 66
+        },
+        {
+          "name": "Скорость",
+          "coverage": 0.929,
+          "rows": 65
+        },
+        {
+          "name": "Модель",
+          "coverage": 0.629,
+          "rows": 44
+        },
+        {
+          "name": "Совместимость",
+          "coverage": 0.214,
+          "rows": 15
+        }
+      ],
+      "must_have": [
+        {
+          "id": "SHIFTER-SPEEDS",
+          "attribute": "Скорость",
+          "rule": "speed count must match the cassette",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "SHIFTER-FAMILY",
+          "attribute": "Модель",
+          "rule": "pull ratio / family must match the derailleur",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Тип"
+      ],
+      "manual_support": {
+        "query": [
+          "shifter"
+        ],
+        "hits": 170,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 521,
+            "section": "3.  Checking if the clamping force is enough to keep the shifter in place."
+          },
+          {
+            "book": "big_blue_book",
+            "page": 519,
+            "section": "4.  Ensure the shifter is properly indexed and functioning smoothly after reinstallation."
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 45,
+            "section": "COMBINED BRAKE LEVER/GEAR SHIFTER ANATOMY"
+          }
+        ]
+      },
+      "note": "mount (clamp vs trigger) matters only if the lever clamps to the bar."
+    },
+    {
+      "category": "Петухи",
+      "category_id": 837,
+      "path": "Трансмиссия > Петухи",
+      "products": 168,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Совместимость",
+          "coverage": 0.714,
+          "rows": 120
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.042,
+          "rows": 7
+        }
+      ],
+      "must_have": [
+        {
+          "id": "HANGER-FRAME",
+          "attribute": "Совместимость",
+          "rule": "hanger must be the frame's own part number",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Тип"
+      ],
+      "manual_support": {
+        "query": [
+          "derailleur hanger"
+        ],
+        "hits": 156,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 588,
+            "section": "DERAILLEUR HANGER ALIGNMENT & REPAIR"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 589,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 90,
+            "section": ""
+          }
+        ]
+      },
+      "note": "a pure model match: no dimensions, no tolerance."
+    },
+    {
+      "category": "Системы",
+      "category_id": 1102,
+      "path": "Трансмиссия > Системы и звезды > Системы",
+      "products": 66,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Длина",
+          "coverage": 1.0,
+          "rows": 66
+        },
+        {
+          "name": "Количество Зубьев",
+          "coverage": 1.0,
+          "rows": 66
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.97,
+          "rows": 64
+        },
+        {
+          "name": "Скорость",
+          "coverage": 0.97,
+          "rows": 64
+        }
+      ],
+      "must_have": [
+        {
+          "id": "CRANKSET-BB",
+          "attribute": "Крепление",
+          "rule": "BB interface must match the bottom bracket",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 403,
+            "quote": "Cranks attach to the end of the spindles, and consequently the crank must be compatible with the spindle."
+          }
+        },
+        {
+          "id": "CRANKSET-BCD",
+          "attribute": "Количество Зубьев",
+          "rule": "chainring sizes must match the stated BCD",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "CRANKSET-SPEEDS",
+          "attribute": "Скорость",
+          "rule": "speed count must match the drivetrain",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Длина"
+      ],
+      "manual_support": {
+        "query": [
+          "crankset"
+        ],
+        "hits": 229,
+        "pages": [
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 3,
+            "section": "C H R I S S I D W E L L S"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 401,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 362,
+            "section": ""
+          }
+        ]
+      },
+      "note": "chainline follows the spindle, not the crank."
+    },
+    {
+      "category": "Звезды",
+      "category_id": 1101,
+      "path": "Трансмиссия > Системы и звезды > Звезды",
+      "products": 208,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Количество Зубьев",
+          "coverage": 1.0,
+          "rows": 208
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.976,
+          "rows": 203
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.962,
+          "rows": 200
+        }
+      ],
+      "must_have": [
+        {
+          "id": "RING-BCD",
+          "attribute": "Крепление",
+          "rule": "BCD and bolt count must match the crank",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "RING-TEETH",
+          "attribute": "Количество Зубьев",
+          "rule": "tooth count is a fit choice, not a preference",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Тип"
+      ],
+      "manual_support": {
+        "query": [
+          "chainring"
+        ],
+        "hits": 341,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 340,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 429,
+            "section": "CHAINRING WEAR AND DAMAGE"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 426,
+            "section": "CHAINRING REPLACEMENT WITH MOUNTING ARMS"
+          }
+        ]
+      },
+      "note": "narrow-wide and 1x/2x must be stated by the row."
+    },
+    {
+      "category": "Шатуны",
+      "category_id": 1103,
+      "path": "Трансмиссия > Системы и звезды > Шатуны",
+      "products": 35,
+      "fitment": "critical",
+      "wave": 2,
+      "attributes_present": [
+        {
+          "name": "Длина",
+          "coverage": 0.971,
+          "rows": 34
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.971,
+          "rows": 34
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.6,
+          "rows": 21
+        },
+        {
+          "name": "Материал",
+          "coverage": 0.543,
+          "rows": 19
+        },
+        {
+          "name": "Скорость",
+          "coverage": 0.371,
+          "rows": 13
+        },
+        {
+          "name": "Количество Зубьев",
+          "coverage": 0.371,
+          "rows": 13
+        }
+      ],
+      "must_have": [
+        {
+          "id": "ARM-BB",
+          "attribute": "Крепление",
+          "rule": "spindle interface must match the bottom bracket",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 403,
+            "quote": "Cranks attach to the end of the spindles, and consequently the crank must be compatible with the spindle."
+          }
+        },
+        {
+          "id": "ARM-LENGTH",
+          "attribute": "Длина",
+          "rule": "length is a rider-size decision, not a compatibility guess",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Материал"
+      ],
+      "manual_support": {
+        "query": [
+          "crank arm"
+        ],
+        "hits": 176,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 349,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 352,
+            "section": "1.  Before proceeding with any crank arm removal, thoroughly inspect the bottom bracket shell and crank arm interface for damage or corrosion."
+          },
+          {
+            "book": "big_blue_book",
+            "page": 352,
+            "section": ""
+          }
+        ]
+      },
+      "note": "length is an input from the rider, so it is required rather than filtered."
+    },
+    {
+      "category": "Втулки задние",
+      "category_id": 760,
+      "path": "Колеса и Втулки > Втулки > Втулки задние",
+      "products": 187,
+      "fitment": "critical",
+      "wave": 3,
+      "attributes_present": [
+        {
+          "name": "Количество отверстий",
+          "coverage": 0.93,
+          "rows": 174
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.882,
+          "rows": 165
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.834,
+          "rows": 156
+        },
+        {
+          "name": "Скорость",
+          "coverage": 0.647,
+          "rows": 121
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.561,
+          "rows": 105
+        },
+        {
+          "name": "Крепление ротора",
+          "coverage": 0.535,
+          "rows": 100
+        },
+        {
+          "name": "Количество Зубьев",
+          "coverage": 0.155,
+          "rows": 29
+        }
+      ],
+      "must_have": [
+        {
+          "id": "HUB-OLD",
+          "attribute": "Крепление",
+          "rule": "over-locknut distance must match the frame (135/142/148)",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "HUB-HOLES",
+          "attribute": "Количество отверстий",
+          "rule": "spoke count must match the rim",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "HUB-ROTOR",
+          "attribute": "Крепление ротора",
+          "rule": "rotor mount must match the rotor",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 744,
+            "quote": "Note the rotor diameter (160mm, 180mm, 203mm typically) and bolt pattern (usually 6-bolt or centerlock) to ensure proper replacement."
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Скорость",
+        "Количество Зубьев"
+      ],
+      "manual_support": {
+        "query": [
+          "hub"
+        ],
+        "hits": 569,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 219,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 56,
+            "section": "HUB GEARS"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 218,
+            "section": ""
+          }
+        ]
+      },
+      "note": "freehub type is the cassette family rule."
+    },
+    {
+      "category": "Втулки передние",
+      "category_id": 761,
+      "path": "Колеса и Втулки > Втулки > Втулки передние",
+      "products": 132,
+      "fitment": "critical",
+      "wave": 3,
+      "attributes_present": [
+        {
+          "name": "Количество отверстий",
+          "coverage": 1.0,
+          "rows": 132
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.917,
+          "rows": 121
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.902,
+          "rows": 119
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.848,
+          "rows": 112
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.735,
+          "rows": 97
+        },
+        {
+          "name": "Крепление ротора",
+          "coverage": 0.568,
+          "rows": 75
+        },
+        {
+          "name": "Скорость",
+          "coverage": 0.015,
+          "rows": 2
+        }
+      ],
+      "must_have": [
+        {
+          "id": "FHUB-OLD",
+          "attribute": "Крепление",
+          "rule": "axle standard must match the fork (100 QR / 15x100 / 15x110)",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "FHUB-HOLES",
+          "attribute": "Количество отверстий",
+          "rule": "spoke count must match the rim",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "FHUB-ROTOR",
+          "attribute": "Крепление ротора",
+          "rule": "rotor mount must match the rotor",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "manual",
+          "needs_manual_check": false,
+          "source": {
+            "book": "big_blue_book",
+            "page": 744,
+            "quote": "Note the rotor diameter (160mm, 180mm, 203mm typically) and bolt pattern (usually 6-bolt or centerlock) to ensure proper replacement."
+          }
+        }
+      ],
+      "nice_to_have": [
+        "Диаметр"
+      ],
+      "manual_support": {
+        "query": [
+          "hub"
+        ],
+        "hits": 569,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 219,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 56,
+            "section": "HUB GEARS"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 218,
+            "section": ""
+          }
+        ]
+      },
+      "note": "a 15 mm hub cannot go in a QR fork - hard exclusion."
+    },
+    {
+      "category": "Обода",
+      "category_id": 750,
+      "path": "Колеса и Втулки > Обода и спицы > Обода",
+      "products": 163,
+      "fitment": "critical",
+      "wave": 3,
+      "attributes_present": [
+        {
+          "name": "Количество отверстий",
+          "coverage": 0.994,
+          "rows": 162
+        },
+        {
+          "name": "Размер колеса",
+          "coverage": 0.994,
+          "rows": 162
+        },
+        {
+          "name": "Бескамерная",
+          "coverage": 0.92,
+          "rows": 150
+        },
+        {
+          "name": "Ширина",
+          "coverage": 0.883,
+          "rows": 144
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.877,
+          "rows": 143
+        },
+        {
+          "name": "Профиль",
+          "coverage": 0.663,
+          "rows": 108
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.08,
+          "rows": 13
+        }
+      ],
+      "must_have": [
+        {
+          "id": "RIM-SIZE",
+          "attribute": "Размер колеса",
+          "rule": "wheel size must match the frame and fork",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "RIM-HOLES",
+          "attribute": "Количество отверстий",
+          "rule": "spoke count must match the hub",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "RIM-BRAKE",
+          "attribute": "Тип",
+          "rule": "rim-brake vs disc-only follows the frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ширина",
+        "Бескамерная"
+      ],
+      "manual_support": {
+        "query": [
+          "rim AND (spoke OR wheel)"
+        ],
+        "hits": 458,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 301,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 109,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 326,
+            "section": ""
+          }
+        ]
+      },
+      "note": "ERD is needed for spoke length but is not recorded."
+    },
+    {
+      "category": "Спицы",
+      "category_id": 751,
+      "path": "Колеса и Втулки > Обода и спицы > Спицы",
+      "products": 310,
+      "fitment": "critical",
+      "wave": 3,
+      "attributes_present": [
+        {
+          "name": "Диаметр",
+          "coverage": 0.806,
+          "rows": 250
+        },
+        {
+          "name": "Длина",
+          "coverage": 0.797,
+          "rows": 247
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.71,
+          "rows": 220
+        }
+      ],
+      "must_have": [
+        {
+          "id": "SPOKE-LENGTH",
+          "attribute": "Длина",
+          "rule": "length must equal the ERD + hub geometry result",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Диаметр"
+      ],
+      "manual_support": {
+        "query": [
+          "spoke"
+        ],
+        "hits": 453,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 296,
+            "section": "BROKEN & DAMAGED SPOKE REPLACEMENT"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 301,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 334,
+            "section": ""
+          }
+        ]
+      },
+      "note": "length is computed, so the engine must be given ERD and hub, not guess."
+    },
+    {
+      "category": "Покрышки",
+      "category_id": 740,
+      "path": "Покрышки и Камеры > Покрышки",
+      "products": 348,
+      "fitment": "critical",
+      "wave": 3,
+      "attributes_present": [
+        {
+          "name": "Размер колеса",
+          "coverage": 0.94,
+          "rows": 327
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.925,
+          "rows": 322
+        },
+        {
+          "name": "Складная",
+          "coverage": 0.92,
+          "rows": 320
+        },
+        {
+          "name": "Бескамерная",
+          "coverage": 0.899,
+          "rows": 313
+        },
+        {
+          "name": "Ширина",
+          "coverage": 0.894,
+          "rows": 311
+        }
+      ],
+      "must_have": [
+        {
+          "id": "TYRE-SIZE",
+          "attribute": "Размер колеса",
+          "rule": "wheel size must match the rim",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ширина",
+        "Бескамерная"
+      ],
+      "manual_support": {
+        "query": [
+          "tire AND (size OR width)"
+        ],
+        "hits": 223,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 287,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 154,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 928,
+            "section": ""
+          }
+        ]
+      },
+      "note": "width is frame clearance - a rider input, not a catalogue filter."
+    },
+    {
+      "category": "Камеры",
+      "category_id": 741,
+      "path": "Покрышки и Камеры > Камеры",
+      "products": 103,
+      "fitment": "critical",
+      "wave": 3,
+      "attributes_present": [
+        {
+          "name": "Размер колеса",
+          "coverage": 0.981,
+          "rows": 101
+        },
+        {
+          "name": "Ширина",
+          "coverage": 0.951,
+          "rows": 98
+        },
+        {
+          "name": "Вентиль",
+          "coverage": 0.932,
+          "rows": 96
+        }
+      ],
+      "must_have": [
+        {
+          "id": "TUBE-SIZE",
+          "attribute": "Размер колеса",
+          "rule": "wheel size must match the tyre",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "TUBE-VALVE",
+          "attribute": "Вентиль",
+          "rule": "valve type and length must clear the rim depth",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ширина"
+      ],
+      "manual_support": {
+        "query": [
+          "inner tube"
+        ],
+        "hits": 142,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 134,
+            "section": "INNER TUBE REPAIR"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 11,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 121,
+            "section": "CUT AT VALVE BASE"
+          }
+        ]
+      },
+      "note": "valve length matters on deep rims and is recorded 93% of the time."
+    },
+    {
+      "category": "Подседелы",
+      "category_id": 727,
+      "path": "Управление > Подседелы",
+      "products": 252,
+      "fitment": "critical",
+      "wave": 4,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 1.0,
+          "rows": 252
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.94,
+          "rows": 237
+        },
+        {
+          "name": "Длина",
+          "coverage": 0.71,
+          "rows": 179
+        },
+        {
+          "name": "Материал",
+          "coverage": 0.667,
+          "rows": 168
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.524,
+          "rows": 132
+        },
+        {
+          "name": "Ход",
+          "coverage": 0.127,
+          "rows": 32
+        }
+      ],
+      "must_have": [
+        {
+          "id": "POST-DIAMETER",
+          "attribute": "Диаметр",
+          "rule": "diameter must match the seat tube exactly",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ход",
+        "Длина"
+      ],
+      "manual_support": {
+        "query": [
+          "seatpost"
+        ],
+        "hits": 86,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 833,
+            "section": "SEATPOST"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 608,
+            "section": "BATTERY"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 837,
+            "section": ""
+          }
+        ]
+      },
+      "note": "dropper travel and insertion depth are frame-limited; 13% coverage on travel."
+    },
+    {
+      "category": "Выносы",
+      "category_id": 721,
+      "path": "Управление > Выносы",
+      "products": 145,
+      "fitment": "critical",
+      "wave": 4,
+      "attributes_present": [
+        {
+          "name": "Диаметр",
+          "coverage": 0.979,
+          "rows": 142
+        },
+        {
+          "name": "Длина",
+          "coverage": 0.903,
+          "rows": 131
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.855,
+          "rows": 124
+        },
+        {
+          "name": "Угол",
+          "coverage": 0.828,
+          "rows": 120
+        },
+        {
+          "name": "Материал",
+          "coverage": 0.497,
+          "rows": 72
+        }
+      ],
+      "must_have": [
+        {
+          "id": "STEM-STEERER",
+          "attribute": "Диаметр",
+          "rule": "steerer clamp and bar clamp diameters must both match",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Длина",
+        "Угол"
+      ],
+      "manual_support": {
+        "query": [
+          "stem"
+        ],
+        "hits": 395,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 825,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 888,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 820,
+            "section": "QUILL STEMS"
+          }
+        ]
+      },
+      "note": "length is fit, not compatibility."
+    },
+    {
+      "category": "Рули",
+      "category_id": 720,
+      "path": "Управление > Рули",
+      "products": 120,
+      "fitment": "critical",
+      "wave": 4,
+      "attributes_present": [
+        {
+          "name": "Тип руля",
+          "coverage": 0.95,
+          "rows": 114
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.892,
+          "rows": 107
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.742,
+          "rows": 89
+        },
+        {
+          "name": "Ширина",
+          "coverage": 0.7,
+          "rows": 84
+        },
+        {
+          "name": "Материал",
+          "coverage": 0.6,
+          "rows": 72
+        }
+      ],
+      "must_have": [
+        {
+          "id": "BAR-CLAMP",
+          "attribute": "Диаметр",
+          "rule": "centre clamp diameter must match the stem",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ширина",
+        "Тип руля"
+      ],
+      "manual_support": {
+        "query": [
+          "handlebar"
+        ],
+        "hits": 382,
+        "pages": [
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 97,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 95,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 96,
+            "section": "STEERING AND WHEELS • HANDLEBARS"
+          }
+        ]
+      },
+      "note": "width is fit; clamp diameter is compatibility."
+    },
+    {
+      "category": "Рулевые колонки",
+      "category_id": 723,
+      "path": "Управление > Рулевые колонки",
+      "products": 183,
+      "fitment": "critical",
+      "wave": 4,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 1.0,
+          "rows": 183
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.929,
+          "rows": 170
+        },
+        {
+          "name": "Цвет",
+          "coverage": 0.699,
+          "rows": 128
+        },
+        {
+          "name": "Крепление",
+          "coverage": 0.464,
+          "rows": 85
+        },
+        {
+          "name": "Размер",
+          "coverage": 0.049,
+          "rows": 9
+        },
+        {
+          "name": "Размер шариков",
+          "coverage": 0.011,
+          "rows": 2
+        }
+      ],
+      "must_have": [
+        {
+          "id": "HEADSET-STD",
+          "attribute": "Тип",
+          "rule": "head-tube standard (EC/ZS/IS) must match the frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "HEADSET-STEERER",
+          "attribute": "Диаметр",
+          "rule": "steerer diameter must match the fork",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Крепление"
+      ],
+      "manual_support": {
+        "query": [
+          "headset"
+        ],
+        "hits": 298,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 51,
+            "section": "CHAPTER 16 — HEADSETS"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 52,
+            "section": ""
+          },
+          {
+            "book": "big_blue_book",
+            "page": 892,
+            "section": ""
+          }
+        ]
+      },
+      "note": "the commonest wrong purchase in the whole catalogue."
+    },
+    {
+      "category": "Вилки",
+      "category_id": 1012,
+      "path": "Управление > Вилки > Вилки",
+      "products": 105,
+      "fitment": "critical",
+      "wave": 4,
+      "attributes_present": [
+        {
+          "name": "Размер колеса",
+          "coverage": 0.99,
+          "rows": 104
+        },
+        {
+          "name": "Тип",
+          "coverage": 0.971,
+          "rows": 102
+        },
+        {
+          "name": "Ось",
+          "coverage": 0.971,
+          "rows": 102
+        },
+        {
+          "name": "Совместимость",
+          "coverage": 0.905,
+          "rows": 95
+        },
+        {
+          "name": "Диаметр",
+          "coverage": 0.857,
+          "rows": 90
+        },
+        {
+          "name": "Ход",
+          "coverage": 0.838,
+          "rows": 88
+        },
+        {
+          "name": "Материал",
+          "coverage": 0.524,
+          "rows": 55
+        }
+      ],
+      "must_have": [
+        {
+          "id": "FORK-AXLE",
+          "attribute": "Ось",
+          "rule": "axle standard must match the hub",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "FORK-STEERER",
+          "attribute": "Диаметр",
+          "rule": "steerer must match the headset and frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "FORK-WHEEL",
+          "attribute": "Размер колеса",
+          "rule": "wheel size must match the frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Ход",
+        "Совместимость"
+      ],
+      "manual_support": {
+        "query": [
+          "fork AND (travel OR steerer)"
+        ],
+        "hits": 120,
+        "pages": [
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 142,
+            "section": "TUNING YOUR SUSPENSION • SUSPENSION FORKS"
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 79,
+            "section": ""
+          }
+        ]
+      },
+      "note": "axle + steerer + wheel size are the three hard exclusions."
+    },
+    {
+      "category": "Амортизаторы",
+      "category_id": 725,
+      "path": "Управление > Амортизаторы",
+      "products": 73,
+      "fitment": "critical",
+      "wave": 4,
+      "attributes_present": [
+        {
+          "name": "Тип",
+          "coverage": 0.973,
+          "rows": 71
+        },
+        {
+          "name": "Ход",
+          "coverage": 0.945,
+          "rows": 69
+        },
+        {
+          "name": "Длина",
+          "coverage": 0.836,
+          "rows": 61
+        }
+      ],
+      "must_have": [
+        {
+          "id": "SHOCK-LENGTH",
+          "attribute": "Длина",
+          "rule": "eye-to-eye length must match the frame",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        },
+        {
+          "id": "SHOCK-STROKE",
+          "attribute": "Ход",
+          "rule": "stroke must match the frame's linkage",
+          "on_mismatch": "exclude",
+          "on_missing": "cannot_confirm",
+          "basis": "mechanical-inference",
+          "needs_manual_check": true,
+          "source": null
+        }
+      ],
+      "nice_to_have": [
+        "Тип"
+      ],
+      "manual_support": {
+        "query": [
+          "shock AND (stroke OR eye)"
+        ],
+        "hits": 12,
+        "pages": [
+          {
+            "book": "big_blue_book",
+            "page": 385,
+            "section": "REMOVAL"
+          },
+          {
+            "book": "big_blue_book",
+            "page": 719,
+            "section": ""
+          },
+          {
+            "book": "bike_repair_manual_chris",
+            "page": 149,
+            "section": "AIR/OIL SHOCK ABSORBER ANATOMY"
+          }
+        ]
+      },
+      "note": "mount hardware is not recorded at all."
+    }
+  ],
+  "tier_b": [
+    {
+      "n": "Крылья",
+      "cid": 304,
+      "ranks": [
+        "Размер колеса",
+        "Ширина"
+      ],
+      "note": "wrong size is ugly, not impossible."
+    },
+    {
+      "n": "Багажники",
+      "cid": 783,
+      "ranks": [
+        "Размер колеса",
+        "Крепление"
+      ],
+      "note": "frame mounts decide; unknown -> confirm."
+    },
+    {
+      "n": "Педали платформенные",
+      "cid": 1106,
+      "ranks": [
+        "Тип"
+      ],
+      "note": "9/16in thread is not recorded anywhere - add the attribute before making it a must-have."
+    },
+    {
+      "n": "Седла",
+      "cid": 726,
+      "ranks": [
+        "Ширина",
+        "Крепление"
+      ],
+      "note": "rails are near-universal."
+    },
+    {
+      "n": "Грипсы, обмотка",
+      "cid": 722,
+      "ranks": [
+        "Тип",
+        "Длина"
+      ],
+      "note": "lock-on vs slide-on is the only real split."
+    },
+    {
+      "n": "Подножки",
+      "cid": 801,
+      "ranks": [
+        "Размер колеса"
+      ],
+      "note": "."
+    },
+    {
+      "n": "Звезды для втулок",
+      "cid": 1105,
+      "ranks": [
+        "Звезда малая",
+        "Совместимость"
+      ],
+      "note": "cog + hub match."
+    },
+    {
+      "n": "Натяжители цепи",
+      "cid": 1017,
+      "ranks": [
+        "Тип"
+      ],
+      "note": "thin data."
+    },
+    {
+      "n": "Троса и оплетка",
+      "cid": 730,
+      "ranks": [
+        "Тип"
+      ],
+      "note": "universal."
+    },
+    {
+      "n": "Подшипники",
+      "cid": 733,
+      "ranks": [
+        "Размер",
+        "Размер шариков"
+      ],
+      "note": "size is a must-have where present (64%); promote when coverage rises."
+    },
+    {
+      "n": "Болты и шайбы",
+      "cid": 732,
+      "ranks": [
+        "Тип",
+        "Крепление"
+      ],
+      "note": "thread/length where stated."
+    }
+  ],
+  "tier_c": [
+    "Инструменты",
+    "Смазки и масла",
+    "Насосы",
+    "Сумки",
+    "Корзины",
+    "Замки",
+    "Зеркала",
+    "Звонки и сигналы",
+    "Перчатки",
+    "Шлем",
+    "Фляги и держатели",
+    "Держатели телефона",
+    "Велокомпьютеры",
+    "Защита",
+    "Детские кресла",
+    "Пеги",
+    "Услуги",
+    "Колпачки и прочее"
+  ],
+  "open_questions": [
+    "Pedal thread (9/16in) is recorded on no product: add the attribute before making it a must-have.",
+    "Bottom-bracket shell standards (BSA/BB86/BB92/PF30/T47) appear only in the excluded e-bike manual; the bicycle manuals state shell type but not the table.",
+    "Rim ERD is not recorded, so spoke length cannot be computed from the catalogue alone.",
+    "The bicycle manuals are silent on speed cross-compatibility; shop decision keeps it exact.",
+    "22 of 48 front derailleurs have no max chainring value; that rule stays soft and mostly unknown."
+  ]
+}

@@ -1,0 +1,89 @@
+{
+ "bikes": 400,
+ "noinfer": false,
+ "fits_total": 1266,
+ "fits_per_bike": 3.17,
+ "bikes_with_ge2": 251,
+ "per_category": {
+  "None": {
+   "not_in_archive": 4400
+  },
+  "chain": {
+   "requirement_missing": 89,
+   "fits": 175,
+   "not_stated": 134,
+   "cannot_confirm": 2
+  },
+  "cassette": {
+   "not_stated": 128,
+   "fits": 165,
+   "no_candidate": 22
+  },
+  "bottom_bracket": {
+   "cannot_confirm": 36,
+   "requirement_missing": 138,
+   "not_stated": 220,
+   "fits": 6
+  },
+  "front_derailleur": {
+   "not_stated": 339,
+   "fits": 27,
+   "no_candidate": 17,
+   "cannot_confirm": 1
+  },
+  "rear_derailleur": {
+   "not_stated": 254,
+   "fits": 78,
+   "no_candidate": 20
+  },
+  "shifters": {
+   "not_stated": 138,
+   "fits": 181,
+   "no_candidate": 9,
+   "cannot_confirm": 2
+  },
+  "crankset": {
+   "requirement_missing": 94,
+   "fits": 143,
+   "not_stated": 142,
+   "cannot_confirm": 2,
+   "no_candidate": 19
+  },
+  "hubs": {
+   "fits": 126,
+   "not_stated": 264,
+   "requirement_missing": 410
+  },
+  "rims": {
+   "not_stated": 187,
+   "fits": 37,
+   "requirement_missing": 164,
+   "no_candidate": 12
+  },
+  "spokes": {
+   "not_stated": 303,
+   "requirement_missing": 97
+  },
+  "tyres": {
+   "not_stated": 287,
+   "requirement_missing": 60,
+   "fits": 53
+  },
+  "seatpost": {
+   "fits": 113,
+   "not_stated": 153,
+   "requirement_missing": 126,
+   "no_candidate": 8
+  },
+  "stem": {
+   "fits": 78,
+   "requirement_missing": 186,
+   "not_stated": 136
+  },
+  "handlebar": {
+   "requirement_missing": 209,
+   "fits": 84,
+   "not_stated": 107
+  }
+ }
+}
